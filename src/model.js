@@ -32,7 +32,11 @@ async function fineTuneModel(clientData, modelName) {
     const labelTensor = tf.tensor2d(labels, [labels.length, 1]);
 
     const classifier = tf.sequential();
-    classifier.add(tf.layers.dense({ units: 256, activation: 'relu', inputShape: [512] }));
+    classifier.add(tf.layers.dense({ units: 512, activation: 'relu', inputShape: [512] }));
+    classifier.add(tf.layers.dropout({ rate: 0.3 }));
+    classifier.add(tf.layers.dense({ units: 256, activation: 'relu' }));
+    classifier.add(tf.layers.dropout({ rate: 0.3 }));
+    classifier.add(tf.layers.dense({ units: 128, activation: 'relu' }));
     classifier.add(tf.layers.dropout({ rate: 0.3 }));
     classifier.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }));
 
@@ -43,7 +47,7 @@ async function fineTuneModel(clientData, modelName) {
     });
 
     await classifier.fit(inputEmbeddings, labelTensor, {
-        epochs: 30,
+        epochs: 100,
         validationSplit: 0.2,
     });
 

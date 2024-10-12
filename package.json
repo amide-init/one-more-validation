@@ -1,6 +1,6 @@
 {
   "name": "one-more-validation",
-  "version": "1.1.0",
+  "version": "1.0.0-beta",
   "description": "validate your input before send it to server",
   "main": "src/index.js",
   "homepage": "https://github.com/amide-init/one-more-validation",
