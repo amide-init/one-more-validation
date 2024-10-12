@@ -1,4 +1,4 @@
-const { classifyInputForClient } = require('./index');
+const { classifyInputForClient } = require('./src/index');
 
 const clientData = [
     { title: 'Java Developer', label: 'Good Fit' },
@@ -342,9 +342,13 @@ const clientData = [
     const inputJobTitle = 'Machine Learning Engineer';
 
     try {
+        // Classify the job title using the classifyInputForClient function
         const classification = await classifyInputForClient(clientId, inputJobTitle, clientData);
-        console.log(`The job title "${inputJobTitle}" is classified as: ${classification.result} and confidence ${classification.confidence}`);
+
+        // Log the result and confidence score
+        console.log(`The job title "${inputJobTitle}" is classified as: ${classification.result} with confidence ${classification.confidence}`);
     } catch (error) {
+        // Log any errors that occur during classification
         console.error('Error during classification:', error);
     }
 })();
